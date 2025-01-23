@@ -1,0 +1,50 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Build the project
+      - name: Build the project
+        run: npm run build
+
+      # Run tests
+      - name: Run tests
+        run: npm test
+
+      # Download Codacy Coverage Reporter
+      - name: Download Codacy Coverage Reporter
+        run: curl -Ls -o codacy-coverage-reporter https://artifacts.codacy.com/bin/codacy-coverage-reporter/13.15.1/codacy-coverage-reporter-linux
+
+      # Make Codacy Coverage Reporter executable
+      - name: Make Coverage Reporter Executable
+        run: chmod +x codacy-coverage-reporter
+
+      # Upload coverage report to Codacy
+      - name: Upload coverage report to Codacy
+        run: ./codacy-coverage-reporter report -r coverage/lcov.info
+        env:
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
