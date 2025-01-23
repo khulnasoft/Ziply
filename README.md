@@ -137,15 +137,3 @@ TestMe.main();
 ### Tests
 
 Tests can be found in `/test` and run by jest. To run the tests call ``npm test``.
-
-## Thanks
-
-* Special thanks to @sole for her initial work.
-* Thanks to YOONBYEONGIN
-* Thanks to Wunschik
-* Thanks to ratbeard
-* Thanks to Xotabu4
-* Thanks to dallenbaldwin
-* Thanks to wiralegawa
-* Thanks to karan-gaur
-* Thanks to malthe 
