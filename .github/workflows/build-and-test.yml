@@ -9,13 +9,11 @@ on:
       - main
 
 jobs:
-  ci:
-    runs-on: ubuntu-20.04
+  build-and-test:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [20]
-  build-and-test:
-    runs-on: ubuntu-latest
 
     steps:
       # Checkout the repository
