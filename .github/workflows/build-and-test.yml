@@ -9,6 +9,11 @@ on:
       - main
 
 jobs:
+  ci:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [20]
   build-and-test:
     runs-on: ubuntu-latest
 
@@ -21,7 +26,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts'
+          node-version: ${{ matrix.node-version }}
+          cache: npm
 
       # Install dependencies
       - name: Install dependencies
