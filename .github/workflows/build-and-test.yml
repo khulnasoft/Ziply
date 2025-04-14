@@ -11,6 +11,9 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
 
     steps:
       # Checkout the repository
@@ -21,7 +24,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts'
+          node-version: ${{ matrix.node-version }}
+          cache: npm
 
       # Install dependencies
       - name: Install dependencies
